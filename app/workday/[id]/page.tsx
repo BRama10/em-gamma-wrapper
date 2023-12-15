@@ -79,7 +79,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     )}
                 </ModalContent>
             </Modal>
-            <NavBar />
+            <NavBar callbackOne={handleModalOpen}/>
             <main className="flex min-h-screen flex-col items-center justify-around bg-black">
                 <div className="flex flex-row justify-around min-h-screen w-full items-center">
                     <Dropdown>
