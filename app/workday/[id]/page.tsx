@@ -38,8 +38,18 @@ export default function Page({ params }: { params: { id: string } }) {
         'sealed_boards': 0,
     })
 
+    const [modalTitle, setModalTitle] = useState('');
     const [modalContent, setModalContent] = useState('');
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+    const handleModalOpen = (key: any) => {
+        if (key == 'guidelines') {
+            setModalTitle('Energy Masters Guidelines')
+            setModalContent(`<p>All Of Those Guidelines From Workday Form Will Be Here</p>`)
+        }
+        onOpen();
+    }
 
     useEffect(() => {
         console.log(memberLocation);
@@ -47,42 +57,28 @@ export default function Page({ params }: { params: { id: string } }) {
 
     return (
         <>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
-                <ModalBody>
-                  <p> 
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
-                  <p>
-                    Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                    dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
-                    Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
-                    Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
-                    proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                  </p>
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Action
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1 text-lg">{modalTitle}</ModalHeader>
+                            <ModalBody>
+                                {modalContent}
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    Close
+                                </Button>
+                                {modalTitle != 'Energy Masters Guidelines' ?
+                                    <Button color="primary" onPress={onClose}>
+                                        Action
+                                    </Button> : <></>
+                                }
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
             <NavBar />
             <main className="flex min-h-screen flex-col items-center justify-around bg-black">
                 <div className="flex flex-row justify-around min-h-screen w-full items-center">
