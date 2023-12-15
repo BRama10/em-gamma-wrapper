@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${racing.className} dark`}>
+      <body className={`${racing.className} dark text-foreground bg-background`}>
         <Providers>
           {children}
         </Providers>  
