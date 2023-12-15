@@ -219,7 +219,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     </div>
 
                     <div className='text-lg col-span-full text-center border-dashed border-b'>Aerators</div>
-                    <h1>Hello</h1>
+                    <h1>Hellos</h1>
                     <h1>Hello</h1>
                     <div className='text-lg col-span-full text-center border-dashed border-b'>Misc</div>
                     <h1>Hello</h1>
