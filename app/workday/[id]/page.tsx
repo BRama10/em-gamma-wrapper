@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     const handleModalOpen = (key: any) => {
-        if (key == 'guidelines') {
+        if (key == 'guideline') {
             setModalTitle('Energy Masters Guidelines')
             setModalContent(`<p>All Of Those Guidelines From Workday Form Will Be Here</p>`)
         }
