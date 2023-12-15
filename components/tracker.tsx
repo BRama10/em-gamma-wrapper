@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, ReactNode} from 'react'
+import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import { motion, useScroll, useMotionValue, useMotionValueEvent } from "framer-motion";
 
 interface TrackerProps {
@@ -20,7 +20,10 @@ const Tracker: React.FC<TrackerProps> = ({ children, callback }) => {
         callback(latest);
     })
 
-    return <div ref={ref}>{children}</div>
+    return <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        ref={ref}>{children}</motion.div>
 };
 
 export default Tracker;

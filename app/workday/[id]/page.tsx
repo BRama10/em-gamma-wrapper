@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, ReactNode } from 'react'
 import Tracker from '@/components/tracker';
 import {
     Dropdown,
@@ -39,17 +39,18 @@ export default function Page({ params }: { params: { id: string } }) {
     })
 
     const [modalTitle, setModalTitle] = useState('');
-    const [modalContent, setModalContent] = useState('');
+    const [modalContent, setModalContent] = useState<ReactNode>(<></>);
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     const handleModalOpen = (key: any) => {
         if (key == 'guideline') {
             setModalTitle('Energy Masters Guidelines')
-            setModalContent(`<p>All Of Those Guidelines From Workday Form Will Be Here</p>`)
+            setModalContent(<p>All Of Those Guidelines From Workday Form Will Be Here</p>)
         }
         onOpen();
-    }
+        console.log(isOpen)
+;    }
 
     useEffect(() => {
         console.log(memberLocation);
