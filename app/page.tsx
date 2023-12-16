@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import { DataTable } from '@/components/data_table';
 
 import 'animate.css';
-import { readFromLocalStorage, writeToLocalStorage, arrayToString, stringToArray } from "./utils";
+import { readFromLocalStorage, writeToLocalStorage, arrayToString, stringToArray, generateRandomString } from "./utils";
 import { redirect } from 'next/navigation';
 
 
@@ -18,15 +18,16 @@ export default function Home() {
 
   const handleNewChecklist = () => {
     var localCounter = readFromLocalStorage('workday_counter');
-    console.log(localCounter);
     if (localCounter) {
       localCounter = stringToArray(localCounter);
       let lastNum = localCounter[localCounter.length - 1];
       localCounter.push(lastNum+1);
       writeToLocalStorage('workday_counter', arrayToString(localCounter));
+      writeToLocalStorage(`workday_id_${lastNum+1}`, generateRandomString(10));
       setRedirect(`/workday/${lastNum+1}`)
     } else {
       writeToLocalStorage('workday_counter', '0');
+      writeToLocalStorage(`workday_id_${0}`, generateRandomString(10));
       setRedirect(`/workday/0`)
     }
   }

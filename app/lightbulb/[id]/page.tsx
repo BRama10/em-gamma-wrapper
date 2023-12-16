@@ -31,6 +31,21 @@ export default function Page({ params }: { params: { id: string } }) {
     const localStorageKey = `lightbulb_${params.id}`;
     const [linkedForm, setLinkedForm] = useState('');
 
+    useEffect(() => {
+        let workday_forms_data = readFromLocalStorage('workday_counter');
+    
+        if (workday_forms_data) {
+            let ids = stringToArray(workday_forms_data);
+            for(const id of ids) {
+                console.log('id', id)
+                console.log(readFromLocalStorage(`workday_${id}_title`));
+            }
+        }
+    }, [])
+
+   
+
+
     return <main className="flex min-h-screen flex-col items-center justify-around bg-black">
         <div className="flex flex-col justify-center min-h-screen w-full items-center gap-3">
             <div className="flex flex-row justify-around gap-2">

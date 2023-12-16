@@ -4,7 +4,7 @@ import './globals.css'
 import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
-const racing = Hedvig_Letters_Serif({weight: "400", subsets: ['latin']})
+// const racing = Hedvig_Letters_Serif({weight: "400", subsets: ['latin']})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${racing.className} dark text-foreground bg-background`}>
+      <body className={`${inter.className} dark text-foreground bg-background`}>
         <Providers>
           {children}
         </Providers>  

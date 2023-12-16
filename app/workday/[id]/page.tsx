@@ -68,6 +68,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
                 const uniqueValues = Array.from<any, string>(prevFormDataCopy.members, item => item);
                 writeToLocalStorage(localStorageKey, {...prevFormData, 'members' : uniqueValues});
+                writeToLocalStorage(`${localStorageKey}_title`, `${prevFormData.address}Apt #${prevFormData.unit_num}`)
                 return prevFormData; // Ensure that the state remains unchanged
             });
         }, 2000);

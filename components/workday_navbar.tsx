@@ -136,7 +136,7 @@ export default function NavBar({ callbackOne, lskey }: { callbackOne: (s: any) =
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button size='sm' color="primary" variant="bordered" onPress={handleSubmit}>
+          <Button size='sm' color="primary" variant="shadow" onPress={handleSubmit}>
             Submit
           </Button>
         </NavbarItem>
