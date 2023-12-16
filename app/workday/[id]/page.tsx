@@ -155,7 +155,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     </div>
                 </Tracker>
                 <Tracker callback={() => console.log()}>
-                    <div className="flex flex-col justify-around min-h-screen w-full items-center">
+                    <div className="flex flex-col justify-around min-h-screen w-full items-center max-w-full">
                         <div className='grid grid-cols-2 border-white border-2 border-solid rounded-sm gap-3 w-[90%]'>
                             <div className='text-lg col-span-full text-center border-dashed border-b'>Sealed/Caulked</div>
                             <div className='flex flex-row col-span-full gap-1 border-solid border-b'>
