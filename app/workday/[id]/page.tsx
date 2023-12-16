@@ -87,7 +87,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const handleModalOpen = (key: any) => {
         if (key == 'guideline') {
             setModalTitle('Energy Masters Guidelines')
-            setModalContent(<p>All Of Those Guidelines From Workday Form Will Be Here</p>)
+            setModalContent(<><img src="../../guidelinespt1.png" /><img src="../../guidelinespt2.png" /><img src="../../guidelinespt3.png" /><img src="../../guidelinespt4.png" /></>)
             onOpen();
         }
     }
@@ -103,7 +103,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
     return (
         <>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} scrollBehavior={'inside'}>
                 <ModalContent>
                     {(onClose) => (
                         <>
