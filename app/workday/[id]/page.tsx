@@ -456,6 +456,12 @@ export default function Page({ params }: { params: { id: string } }) {
                         <div className='border-solid border text-center'><b>Details</b></div>
                         <div className='border-solid border text-center'><b>Where?</b></div>
 
+                        <div className='border-solid border text-center col-span-full'><b><i>Living Room, Dining Room, Entryway, and Bedrooms</i></b></div>
+
+                        <div className='border-solid border text-center flex items-center justify-center'><Checkbox defaultSelected></Checkbox></div>
+                        <div className='border-solid border text-center'>Trim (Doors, Windows)</div>
+                        <div className='border-solid border flex items-center justify-center'><Button className='w-[90%] h-[90%]' color='secondary' onPress={onOpen}>More</Button></div>
+
                         <div className='border-solid border text-center flex items-center justify-center'><Checkbox defaultSelected></Checkbox></div>
                         <div className='border-solid border text-center'>Trim (Doors, Windows)</div>
                         <div className='border-solid border flex items-center justify-center'><Button className='w-[90%] h-[90%]' color='secondary' onPress={onOpen}>More</Button></div>

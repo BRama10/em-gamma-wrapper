@@ -18,6 +18,7 @@ const Tracker: React.FC<TrackerProps> = ({ children, callback }) => {
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         callback(latest);
+        console.log(latest);
     })
 
     return <motion.div
