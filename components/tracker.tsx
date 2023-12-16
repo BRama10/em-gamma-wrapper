@@ -21,7 +21,7 @@ const Tracker: React.FC<TrackerProps> = ({ children, callback }) => {
     })
 
     return <motion.div
-        style={{opacity: scrollYProgress}}
+        // style={{opacity: scrollYProgress}}
         ref={ref}>{children}</motion.div>
 };
 
