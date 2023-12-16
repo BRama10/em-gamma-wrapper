@@ -23,12 +23,17 @@ import {
     ModalFooter,
     useDisclosure
 } from "@nextui-org/react";
-import NavBar from '@/components/navbar';
+import NavBar from '@/components/workday_navbar';
 
+import { readFromLocalStorage, writeToLocalStorage, arrayToString, stringToArray } from "../../utils";
 
 export default function Page({ params }: { params: { id: string } }) {
+    const localStorageKey = `workday_${params.id}`;
+
     const [memberLocation, setMemberLocation] = useState(0);
     const [formData, setFormData] = useState<any>({
+        'address': '',
+        'unit_num': '',
         'team_lead': '',
         'members': [],
         'sealed_switches': 0,
@@ -42,7 +47,36 @@ export default function Page({ params }: { params: { id: string } }) {
         'toilet_tummy': 0,
         'standard_strip': 0,
         'smart_strip': 0,
+        'notes': '',
+        'maintenance': '',
+        'is_good_usage': false,
+        'is_good_interview': false,
     })
+
+    useEffect(() => {
+        let read_data = readFromLocalStorage(localStorageKey);
+        console.log(read_data);
+
+        if (read_data) {
+            setFormData(read_data);
+        }
+
+        const intervalId = setInterval(() => {
+            setFormData((prevFormData: any) => {
+                // Work with the latest state
+                const prevFormDataCopy = { ...prevFormData };
+
+                const uniqueValues = Array.from<any, string>(prevFormDataCopy.members, item => item);
+                writeToLocalStorage(localStorageKey, {...prevFormData, 'members' : uniqueValues});
+                return prevFormData; // Ensure that the state remains unchanged
+            });
+        }, 2000);
+
+
+
+        // Clean up the interval when the component is unmounted
+        return () => clearInterval(intervalId);
+    }, [])
 
     const [modalTitle, setModalTitle] = useState('');
     const [modalContent, setModalContent] = useState<ReactNode>(<></>);
@@ -54,12 +88,17 @@ export default function Page({ params }: { params: { id: string } }) {
             setModalTitle('Energy Masters Guidelines')
             setModalContent(<p>All Of Those Guidelines From Workday Form Will Be Here</p>)
             onOpen();
-        } 
+        }
     }
 
     useEffect(() => {
         console.log(memberLocation);
     }, [memberLocation]);
+
+    const selectedValue = React.useMemo(
+        () => Array.from(formData.members).join(", ").replaceAll("_", " "),
+        [formData.members]
+      );
 
     return (
         <>
@@ -85,10 +124,10 @@ export default function Page({ params }: { params: { id: string } }) {
                     )}
                 </ModalContent>
             </Modal>
-            <NavBar callbackOne={handleModalOpen} />
+            <NavBar callbackOne={handleModalOpen} lskey={localStorageKey} />
             <main className="flex min-h-screen flex-col items-center justify-around bg-black">
                 <Tracker callback={() => console.log()}>
-                    <div className="flex flex-col justify-center min-h-screen w-full items-center">
+                    <div className="flex flex-col justify-center min-h-screen w-full items-center gap-3">
                         <div className="flex flex-row justify-around gap-2">
                             <Dropdown>
                                 <DropdownTrigger>
@@ -116,7 +155,7 @@ export default function Page({ params }: { params: { id: string } }) {
                                     <Button
                                         variant="bordered"
                                     >
-                                        Select Members
+                                        {formData.members.length == 0 ? 'Select Members' : selectedValue}
                                     </Button>
                                 </DropdownTrigger>
                                 <DropdownMenu
@@ -137,21 +176,36 @@ export default function Page({ params }: { params: { id: string } }) {
                                 </DropdownMenu>
                             </Dropdown>
                         </div>
-                        <div className="flex flex-row justify-around pt-[6%] w-[90%] gap-4">
-                            <Input
-                                type="text"
-                                label="Address"
-                                labelPlacement='inside'
-                                classNames = {{
-                                    input: ['text-sm']
-                                }}
-                            />
-                            <Input
-                                type="number"
-                                label="Unit #"
-                                labelPlacement='inside'
-                            />
-                        </div>
+
+                        <Input
+                            type="text"
+                            label="Address"
+                            labelPlacement='inside'
+                            classNames={{
+                                input: ['text-[17px]']
+                            }}
+                            onValueChange={(v) => {
+                                setFormData((prevFormState: any) => {
+                                    return { ...prevFormState, 'address': v, }
+                                });
+                            }}
+                            value={formData.address}
+                        />
+                        <Input
+                            type="number"
+                            label="Unit #"
+                            labelPlacement='inside'
+                            classNames={{
+                                input: ['text-[17px]']
+                            }}
+                            onValueChange={(v) => {
+                                setFormData((prevFormState: any) => {
+                                    return { ...prevFormState, 'unit_num': v, }
+                                });
+                            }}
+                            value={formData.unit_num}
+                        />
+
                     </div>
                 </Tracker>
                 <Tracker callback={() => console.log()}>
