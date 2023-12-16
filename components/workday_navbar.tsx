@@ -85,7 +85,7 @@ export default function NavBar({ callbackOne, lskey }: { callbackOne: (s: any) =
     
     console.log({...triaged_data})
 
-    let ENDPOINT = 'https://script.google.com/macros/s/AKfycbzFNKFdHhi2I-vTq-LYQyEsWTnM4qOfuXu6SrTF6ucNdQl0XSrCSKPOEBCzdXszTjD0mw/exec';
+    let ENDPOINT = 'https://script.google.com/macros/s/AKfycbz4rGvxQCQ4mGeD2OL9iVklN6gol32QC_cCwNu0NP1MN4CwBjhgAzYZhjYheMplSU3fHg/exec';
     const response = await axios.post(ENDPOINT, JSON.stringify(triaged_data));
     console.log(response.data);
     

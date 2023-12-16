@@ -21,7 +21,8 @@ import {
     ModalBody,
     ModalHeader,
     ModalFooter,
-    useDisclosure
+    useDisclosure,
+    Textarea
 } from "@nextui-org/react";
 import NavBar from '@/components/workday_navbar';
 
@@ -67,7 +68,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 const prevFormDataCopy = { ...prevFormData };
 
                 const uniqueValues = Array.from<any, string>(prevFormDataCopy.members, item => item);
-                writeToLocalStorage(localStorageKey, {...prevFormData, 'members' : uniqueValues});
+                writeToLocalStorage(localStorageKey, { ...prevFormData, 'members': uniqueValues });
                 writeToLocalStorage(`${localStorageKey}_title`, `${prevFormData.address}Apt #${prevFormData.unit_num}`)
                 return prevFormData; // Ensure that the state remains unchanged
             });
@@ -99,7 +100,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const selectedValue = React.useMemo(
         () => Array.from(formData.members).join(", ").replaceAll("_", " "),
         [formData.members]
-      );
+    );
 
     return (
         <>
@@ -506,7 +507,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     </div></Tracker>
 
                 <div className="flex flex-col justify-around min-h-screen w-full items-center">
-                    <div className='grid grid-cols-custom3 grid-rows-6 border-white border-2 border-solid rounded-sm w-[90%]'>
+                    {/* <div className='grid grid-cols-custom3 grid-rows-6 border-white border-2 border-solid rounded-sm w-[90%]'>
                         <div className='border-solid border text-center flex items-center justify-center'><Checkbox defaultSelected></Checkbox></div>
                         <div className='border-solid border text-center'><b>Details</b></div>
                         <div className='border-solid border text-center'><b>Where?</b></div>
@@ -520,7 +521,26 @@ export default function Page({ params }: { params: { id: string } }) {
                         <div className='border-solid border text-center flex items-center justify-center'><Checkbox defaultSelected></Checkbox></div>
                         <div className='border-solid border text-center'>Trim (Doors, Windows)</div>
                         <div className='border-solid border flex items-center justify-center'><Button className='w-[90%] h-[90%]' color='secondary' onPress={onOpen}>More</Button></div>
-                    </div>
+                    </div> */}
+
+                    <Textarea
+                        label="Standard Notes"
+                        placeholder="Enter any additional notes!"
+                        className="max-w-xs"
+                        value={formData.notes}
+                        onValueChange={(v) => setFormData((prevFormState: any) => {
+                            return { ...prevFormState, 'notes' : v, }
+                        })}
+                    />
+                    <Textarea
+                        label="Maintenance Notes"
+                        placeholder="Enter any maintenance-specific notes!"
+                        className="max-w-xs"
+                        value={formData.maintenance}
+                        onValueChange={(v) => setFormData((prevFormState: any) => {
+                            return { ...prevFormState, 'maintenance' : v, }
+                        })}
+                    />
                 </div>
             </main>
         </>
